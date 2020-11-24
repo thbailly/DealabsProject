@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bon plan{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="card text-white bg-dark my-3">
+            <div class="card-body">
+                <div class="mb-2">
+                    {% if app.user %}
+                        <a class="btn btn-outline-primary btn-sm"href="{{ path('down_deal',{"id" : plan.id}) }}">-</a>
+                        <span>{{ plan.rateValue }}°</span>
+                        <a class="btn btn-outline-danger btn-sm" href="{{ path('up_deal',{"id" : plan.id}) }}">+</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary btn-sm"href="{{ path('app_login') }}">-</a>
+                        <span>{{ plan.rateValue }}°</span>
+                        <a class="btn btn-outline-danger btn-sm" href="{{ path('app_login') }}">+</a>
+                    {% endif %}
+                </div>
+                <h5 class="card-title text-force-break">{{ plan.title }}</h5>
+                <p class="card-text text-force-break">{{ plan.description }}</p>
+                <p class="card-text">{{ plan.price }}€ - <del>{{ plan.normalPrice }}€</del></p>
+                <p class="card-text">{{ plan.startDate | date('m/d/Y')}} - {{ plan.endDate | date('m/d/Y')}}</p>
+                <a href="{{ plan.link }}" target="_blank"><button class="btn btn-primary btn-lg">Voir le plan</button></a>
+
+            </div>
+            
+            {% if app.user and app.user.id not in plan.getUsersSaveId%}
+                <a class="btn btn-primary" href="{{ path('user_saveDeal', {"dealid" : plan.id}) }}">Sauvegarder ce plan</a>
+                <a class="btn btn-danger" href="{{ path('deal_signal', {"dealId" : plan.id}) }}">Signaler ce deal</a>
+            {% else %}
+                <a class="btn btn-primary disabled">Sauvegarder ce plan</a>
+            {% endif %}
+            {% include '/group/groupList.html.twig' with {'groups' : plan.groups, 'dealid' : plan.id} %}
+        </div>
+
+        <!-- Formulaire d'ajout d'un commentaire -->
+        {% include '/comment/create.html.twig' with {'form' : form} %}
+
+        <!-- Liste des commentaires du deal-->
+        {% include '/comment/commentList.html.twig' with {'deal' : plan, 'comments': comments} %}
+        
+    </div>
+
+    <div class="mt-3 col-md-2">
+        {% include '/deal/hotDealsList.html.twig' with {'deals' : hotplans} %}
+    </div>
+</div>
+
+
+
+{% endblock %}

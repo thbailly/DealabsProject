@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Code promo{% endblock %}
+
+{% block body %}
+
+    <div class="card text-white bg-dark my-3">
+        <div class="card-body">
+            <div class="mb-2">
+                {% if app.user %}
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('down_deal', {"id" : promocode.id}) }}">-</a>
+                    <span>{{ promocode.rateValue }}°</span>
+                    <a class="btn btn-outline-danger btn-sm" href="{{ path('up_deal', {"id" : promocode.id}) }}">+</a>
+                {% else %}
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_login') }}">-</a>
+                    <span>{{ promocode.rateValue }}°</span>
+                    <a class="btn btn-outline-danger btn-sm" href="{{ path('app_login') }}">+</a>
+                {% endif %}
+            </div>
+            <h5 class="card-title">{{ promocode.title }}</h5>
+            <p class="card-text">{{ promocode.description }}</p>
+            <p class="card-text">{{ promocode.value }}€ - {{ promocode.typeCode }}</p>
+            <p class="card-text">Code: <span
+                        class="border border-white rounded-pill p-1 font-weight-bold">{{ promocode.code }}</span></p>
+            <p class="card-text">{{ promocode.startDate | date('m/d/Y') }} - {{ promocode.endDate | date('m/d/Y') }}</p>
+            <a href="{{ promocode.link }}" target="_blank">
+                <button class="btn btn-primary btn-lg">Voir le code promo</button>
+            </a>
+        </div>
+
+        {% if app.user and app.user.id not in promocode.getUsersSaveId%}
+            <a class="btn btn-primary" href="{{ path('user_saveDeal', {"dealid" : promocode.id}) }}">Sauvegarder ce code promo</a>
+            <a class="btn btn-danger" href="{{ path('deal_signal', {"dealId" : promocode.id}) }}">Signaler ce deal</a>
+        {% else %}
+            <a class="btn btn-primary disabled">Sauvegarder ce code promo</a>
+        {% endif %}
+
+        {% include '/group/groupList.html.twig' with {'groups' : promocode.groups, 'dealid' : promocode.id} %}
+    </div>
+
+    <!-- Formulaire d'ajout d'un commentaire -->
+    {% include '/comment/create.html.twig' with {'form' : form} %}
+
+    <!-- Liste des commentaires du deal-->
+    {% include '/comment/commentList.html.twig' with {'deal' : promocode, 'comments': comments} %}
+
+
+{% endblock %}

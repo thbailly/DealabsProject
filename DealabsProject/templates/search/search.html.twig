@@ -1,0 +1,14 @@
+{% block body %}
+    <form name="search" action="{{ path('deal_search') }}" method="post">
+    <div class="form-inline my-2 my-lg-0 mr-4">
+        <div class="form-group">
+            {{ form_widget(form.search, { 'attr': {'class': 'form-control', 'placeholder': 'Mot(s) clé(s)'} }) }}
+        </div>
+        <div class="text-center">
+            {{ form_widget(form.submit, { 'label': 'Rechercher', 'attr': {'class': 'btn btn-primary'} }) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}

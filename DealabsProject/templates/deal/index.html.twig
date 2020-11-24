@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Deals{% endblock %}
+
+{% block body %}
+
+
+<div id="topRow">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link {{ top }}" href="{{ path('home') }}">À la une</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ hot }}" href="{{ path('hot') }}">Hot</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ news }}" href="{{ path('news') }}">Nouveaux</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ topcommented }}" href="{{path('commented')}}">Commentés</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+
+    <div class="col-md-10">
+        <div id="botRow">
+            <div class="row">
+                {% include '/deal/dealsList.html.twig' with {'deals' : deals} %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        {% include '/deal/hotDealsList.html.twig' with {'deals' : hotdeals} %}
+    </div>
+
+</div>
+{% endblock %}

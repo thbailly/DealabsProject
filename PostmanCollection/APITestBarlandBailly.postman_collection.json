@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "6bcc4d0d-0762-4243-82fb-58546c7150af",
+		"name": "APITestBarlandBailly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9521/api/weeklyDeals/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9521/api/weeklyDeals/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9521",
+					"path": [
+						"api",
+						"weeklyDeals",
+						""
+					]
+				},
+				"description": "Retourne la liste des deals de la semaine"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9521/api/weeklyDeals/4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9521/api/weeklyDeals/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9521",
+					"path": [
+						"api",
+						"weeklyDeals",
+						"4"
+					]
+				},
+				"description": "Retourne le deal de la semaine avec l'ID 4"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9521/api/weeklyDeals/-1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9521/api/weeklyDeals/-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9521",
+					"path": [
+						"api",
+						"weeklyDeals",
+						"-1"
+					]
+				},
+				"description": "Retourne une erreur 404 après une requête avec un ID invalide"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9521/api/users/savedDeals",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearerdsfefsqdf",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9521/api/users/2/savedDeals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9521",
+					"path": [
+						"api",
+						"users",
+						"2",
+						"savedDeals"
+					]
+				},
+				"description": "Retourne la liste des deals sauvegardés par l'utilisateur connecté via le token dans le header\n\nIci erreur car token invalide"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9521/api/users/savedDeals",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer 6b24e5ce9b56d52c21aedec975f7f2fc47a21c80db7347e7491ea026ba50910f181d7d61356e9f907ccd192182b31573712a5b01ad6b0d2d6b431466",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9521/api/users/-4/savedDeals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9521",
+					"path": [
+						"api",
+						"users",
+						"-4",
+						"savedDeals"
+					]
+				},
+				"description": "Ici toekn correct donc l'api retourne les deals sauvegardés"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9521/api/users/savedDeals",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer 6b24e5ce9b56d52c21aedec975f7f2fc47a21c80db7347e7491ea026ba50910f181d7d61356e9f907ccd192182b31573712a5b01ad6b0d2d6b431466",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9521/api/users/2/savedDeals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9521",
+					"path": [
+						"api",
+						"users",
+						"2",
+						"savedDeals"
+					]
+				},
+				"description": "Retourne les deals sauvegardés d'un utilsateur donné"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

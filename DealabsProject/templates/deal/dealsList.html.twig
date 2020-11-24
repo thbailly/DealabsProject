@@ -1,0 +1,41 @@
+<div>
+{% if deals | length > 0 %}
+    {% for deal in deals %}
+        <div class="card text-white bg-dark mb-3">
+            <h5 class="card-header text-force-break">{{ deal.title }}</h5>
+            <div class="card-body">
+                <div class="mb-2">
+                    {% if app.user %}
+                        <a class="btn btn-outline-primary btn-sm" href="{{ path('down_deal',{"id" : deal.id}) }}">-</a>
+
+                        <span>{{ deal.rateValue }}°</span>
+
+                        <a class="btn btn-outline-danger btn-sm" href="{{ path('up_deal', {"id" : deal.id}) }}">+</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary btn-sm" href="{{ path('app_login') }}">-</a>
+                        <span>{{ deal.rateValue }}°</span>
+                        <a class="btn btn-outline-danger btn-sm" href="{{ path('app_login') }}">+</a>
+                    {% endif %}
+                </div>
+                <h5 class="card-title">{{ deal.id }}</h5>
+                <p class="card-text text-force-break">{{ deal.description }}</p>
+                <p class="card-text">{{ deal.startDate | date('m/d/Y') }} - {{ deal.endDate | date('m/d/Y') }}</p>
+                <div class="d-flex justify-content-between">
+                    {% if type == 'Plan' %}
+                        <a href="{{ path('plan', {'planid': deal.id, "plan" : deal}) }}" class="btn btn-primary">Voir le plan</a>
+                    {% endif %}
+                    {% if type == 'PromoCode' %}
+                        <a href="{{ path('promocode', {'promocodeid': deal.id, "promocode" : deal}) }}" class="btn btn-primary">Voir le code promo</a>
+                    {% endif %}
+                    {% if type == 'Deal' %}
+                        <a href="{{ path('deal', {'dealid': deal.id, "deal" : deal}) }}" class="btn btn-primary">Voir le deal</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% include '/group/groupList.html.twig' with {'groups' : deal.groups, 'dealid' : deal.id} %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Pas de deals à afficher !</p>
+{% endif %}
+</div>

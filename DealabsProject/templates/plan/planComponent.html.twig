@@ -1,0 +1,33 @@
+<div class="card text-white bg-dark mb-3">
+    <h5 class="card-header">{{ plan.title }}</h5>
+    <div class="card-body">
+        <div class="mb-2">
+            {% if app.user %}
+                <a class="btn btn-outline-primary btn-sm" href="{{ path('down_plan',{"id" : plan.id}) }}">-</a>
+                <span>{{ plan.rateValue }}°</span>
+                <a class="btn btn-outline-danger btn-sm" href="{{ path('up_plan',{"id" : plan.id}) }}">+</a>
+            {% else %}
+                <a class="btn btn-outline-primary btn-sm" href="{{ path('app_login') }}">-</a>
+                <span>{{ plan.rateValue }}°</span>
+                <a class="btn btn-outline-danger btn-sm" href="{{ path('app_login') }}">+</a>
+            {% endif %}
+
+        </div>
+        <h5 class="card-title text-force-break">{{ plan.id }}</h5>
+        <p class="card-text text-force-break">{{ plan.description }}</p>
+        <p class="card-text">{{ plan.startDate | date('m/d/Y') }} - {{ plan.endDate | date('m/d/Y') }}</p>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('plan', {'planid': plan.id, "plan" : plan}) }}" class="btn btn-primary">Voir le plan</a>
+
+            {% set nbcom = plan.comments | length %}
+            <div class="border border-secondary rounded-pill p-2">
+                {{ nbcom }} {{ nbcom > 1 ? 'commentaires' : 'commentaire' }}
+            </div>
+        </div>
+        {% if app.user and app.user.id not in plan.getUsersSaveId%}
+            <a class="btn btn-primary" href="{{ path('user_saveDeal', {"planid" : plan.id}) }}">Sauvegarder ce deal</a>
+        {% endif %}
+    </div>
+    {% include '/group/groupList.html.twig' with {'groups' : plan.groups} %}
+</div>

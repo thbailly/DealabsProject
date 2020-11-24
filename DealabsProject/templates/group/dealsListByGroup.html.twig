@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center">Groupe : {{ group.name }}</h2>
+    {% include '/deal/dealsList.html.twig' with {'deals' : deals} %}
+
+{% endblock %}

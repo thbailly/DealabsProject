@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création promo code{% endblock %}
+
+{% block body %}
+
+<h2 class="text-center my-3">Formulaire de création d'un code promo</h2>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        {{ form_start(form) }}
+
+            <div class="form-group">
+                <label>Titre</label>
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Titre'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                {{ form_widget(form.description, { 'attr': {'class': 'form-control', 'placeholder': 'Description'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Lien</label>
+                {{ form_widget(form.link, { 'attr': {'class': 'form-control', 'placeholder': 'Lien'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Date de début</label>
+                {{ form_widget(form.startDate) }}
+            </div>
+            <div class="form-group">
+                <label>Date de fin</label>
+                {{ form_widget(form.endDate) }}
+            </div>
+            <div class="form-group">
+                <label>Montant du code promo</label>
+                {{ form_widget(form.value, { 'attr': {'class': 'form-control', 'placeholder': 'Montant du code promo'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Type de code promo</label>
+                {{ form_widget(form.typeCode, { 'attr': {'class': 'form-control', 'placeholder': 'Type de code promo'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Valeur du code promo</label>
+                {{ form_widget(form.code, { 'attr': {'class': 'form-control', 'placeholder': 'Valeur du code promo'} }) }}
+            </div>
+
+            <div class="text-center">
+                {{ form_widget(form.submit, { 'label': 'Poster le code promo', 'attr': {'class': 'btn btn-primary btn-lg'} }) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <h3>Aperçu du code promo:</h3>
+
+        <div class="card text-white bg-dark my-3">
+            <div class="card-body">
+                <div class="mb-2">
+                    <a class="btn btn-outline-primary btn-sm disabled">-</a>
+                    <span>0°</span>
+                    <a class="btn btn-outline-danger btn-sm disabled">+</a>
+                </div>
+                <h5 class="card-title" id="titlePreview"></h5>
+                <p class="card-text" id="descriptionPreview"></p>
+                    <p class="card-text"><span id="valuePreview"></span>€ - <span id="typePreview"></span></p>
+                    <p class="card-text">Code: <span id="codePreview" class="border border-white rounded-pill p-1 font-weight-bold"></span></p>
+                    <p class="card-text">01/01/2018 - 02/03/2019</p>
+                <a><button class="btn btn-primary btn-lg disabled" target="_blank">Voir le code promo</button></a>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var inputTitle = document.querySelector('#promo_code_title');
+    var titlePreview = document.querySelector('#titlePreview');
+    titlePreview.textContent = "Titre";
+    inputTitle.addEventListener('input', function()
+    {
+        titlePreview.textContent = inputTitle.value ? inputTitle.value : "Titre";
+    });
+
+    var inputDescription = document.querySelector('#promo_code_description');
+    var descriptionPreview = document.querySelector('#descriptionPreview');
+    descriptionPreview.textContent = "Description";
+    inputDescription.addEventListener('input', function()
+    {
+        descriptionPreview.textContent = inputDescription.value ? inputDescription.value : "Description";
+    });
+
+    var inputValue = document.querySelector('#promo_code_value');
+    var valuePreview = document.querySelector('#valuePreview');
+    valuePreview.textContent = "0";
+    inputValue.addEventListener('input', function()
+    {
+        valuePreview.textContent = inputValue.value ? inputValue.value : "0";
+    });
+
+    var inputType = document.querySelector('#promo_code_type');
+    var typePreview = document.querySelector('#typePreview');
+    typePreview.textContent = "Type";
+    inputType.addEventListener('input', function()
+    {
+        typePreview.textContent = inputType.value ? inputType.value : "Type";
+    });
+
+    var inputCode = document.querySelector('#promo_code_code');
+    var codePreview = document.querySelector('#codePreview');
+    codePreview.textContent = "Code";
+    inputCode.addEventListener('input', function()
+    {
+        codePreview.textContent = inputCode.value ? inputCode.value : "Code";
+    });
+</script>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% block body %}
+
+{% for alert in alerts %}
+
+<div class="card">
+  <div class="card-body d-flex justify-content-between">
+    <h5>Mot clé: {{ alert.keyword }}</h5>
+    <h5>Note minimale: {{ alert.minimumLength }}</h5>
+    <a class="btn btn-danger text-white" href="{{ path('delete_alert', {"alertid" : alert.id}) }}">Supprimer</a>
+  </div>
+</div>
+
+{% endfor %}
+
+{% if alerts | length == 0 %}
+<p>Aucune alerte configurée</p>
+{% endif %}
+
+{% endblock %}

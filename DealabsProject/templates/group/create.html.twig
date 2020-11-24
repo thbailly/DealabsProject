@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création groupe{% endblock %}
+
+{% block body %}
+
+<h2 class="text-center my-3">Formulaire de création d'un groupe</h2>
+{{ form_start(form) }}
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-right">Nom</label>
+        {{ form_widget(form.name, { 'attr': {'class': 'col-sm-10 form-control', 'placeholder': 'Nom'} }) }}
+    </div>
+
+    <div class="text-center">
+        {{ form_widget(form.submit, { 'label': 'Créer un groupe', 'attr': {'class': 'btn btn-primary btn-lg'} }) }}
+    </div>
+
+{{ form_end(form) }}
+
+{% endblock %}

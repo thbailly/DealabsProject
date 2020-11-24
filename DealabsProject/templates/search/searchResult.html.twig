@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Résultats de la recherche</h2>
+    {% if deals  | length > 0 %}
+        {% include '/deal/dealsList.html.twig' with {'deals' : deals} %}
+    {% else %}
+        <p> Pas de deal à afficher</p>
+    {% endif %}
+{% endblock %}

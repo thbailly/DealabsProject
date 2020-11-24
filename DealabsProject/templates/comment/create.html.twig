@@ -1,0 +1,16 @@
+
+{% if app.user %}
+    <div class="mb-2 border border-dark p-2 rounded">
+        {{ form_start(form) }}
+        <div class="form-group">
+            <label>Commentaire</label>
+            {{ form_widget(form.text, { 'attr': {'class': 'form-control', 'placeholder': 'Commentaire'} }) }}
+        </div>
+        <div class="text-right">
+            {{ form_widget(form.submit, { 'label': 'Poster le commentaire', 'attr': {'class': 'btn btn-secondary'} }) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% else %}
+    <p class="alert alert-danger">Connectez-vous pour pouvoir commenter</p>
+{% endif %}

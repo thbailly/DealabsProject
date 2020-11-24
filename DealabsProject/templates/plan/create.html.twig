@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création bon plan{% endblock %}
+
+{% block body %}
+
+<h2 class="text-center my-3">Formulaire de création d'un bon plan</h2>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        {{ form_start(form) }}
+            <div class="form-group">
+                <label>Titre</label>
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Titre'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                {{ form_widget(form.description, { 'attr': {'class': 'form-control', 'placeholder': 'Description'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Lien</label>
+                {{ form_widget(form.link, { 'attr': {'class': 'form-control', 'placeholder': 'Lien'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Date de début</label>
+                {{ form_widget(form.startDate) }}
+            </div>
+            <div class="form-group">
+                <label>Date de fin</label>
+                {{ form_widget(form.endDate) }}
+            </div>
+            <div class="form-group">
+                <label>Prix du bon plan</label>
+                {{ form_widget(form.price, { 'attr': {'class': 'form-control', 'placeholder': 'Prix du bon plan'} }) }}
+            </div>
+            <div class="form-group">
+                <label>Prix sur le marché</label>
+                {{ form_widget(form.normalPrice, { 'attr': {'class': 'form-control', 'placeholder': 'Prix sur le marché'} }) }}
+            </div>
+
+            <div class="text-center">
+                {{ form_widget(form.submit, { 'label': 'Poster le bon plan', 'attr': {'class': 'btn btn-primary btn-lg'} }) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <h3>Aperçu du bon plan:</h3>
+        <div class="card text-white bg-dark my-3">
+            <div class="card-body">
+                <div class="mb-2">
+                    <a class="btn btn-outline-primary btn-sm disabled">-</a>
+                    <span>0°</span>
+                    <a class="btn btn-outline-danger btn-sm disabled">+</a>
+                </div>
+                <h5 class="card-title" id="titlePreview"></h5>
+                <p class="card-text" id="descriptionPreview"></p>
+                <p class="card-text"><span id="pricePreview"></span>€ - <del><span id="normalPricePreview"></span>€</del></p>
+                <p class="card-text">01/01/2018 - 02/03/2019</p>
+                <a><button class="btn btn-primary btn-lg disabled" target="_blank">Voir le plan</button></a>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var inputTitle = document.querySelector('#plan_title');
+    var titlePreview = document.querySelector('#titlePreview');
+    titlePreview.textContent = "Titre";
+    inputTitle.addEventListener('input', function()
+    {
+        titlePreview.textContent = inputTitle.value ? inputTitle.value : "Titre";
+    });
+
+    var inputDescription = document.querySelector('#plan_description');
+    var descriptionPreview = document.querySelector('#descriptionPreview');
+    descriptionPreview.textContent = "Description";
+    inputDescription.addEventListener('input', function()
+    {
+        descriptionPreview.textContent = inputDescription.value ? inputDescription.value : "Description";
+    });
+
+    var inputPrice = document.querySelector('#plan_price');
+    var pricePreview = document.querySelector('#pricePreview');
+    pricePreview.textContent = "0";
+    inputPrice.addEventListener('input', function()
+    {
+        pricePreview.textContent = inputPrice.value ? inputPrice.value : "0";
+    });
+
+    var inputNormalPrice = document.querySelector('#plan_normalPrice');
+    var normalPricePreview = document.querySelector('#normalPricePreview');
+    normalPricePreview.textContent = "0";
+    inputNormalPrice.addEventListener('input', function()
+    {
+        normalPricePreview.textContent = inputNormalPrice.value ? inputNormalPrice.value : "0";
+    });
+</script>
+
+</div>
+
+{% endblock %}

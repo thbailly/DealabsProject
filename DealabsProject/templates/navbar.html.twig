@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand d-flex" href="{{ path('home') }}">
+        <img src="https://static-s.aa-cdn.net/img/ios/914813032/642e5af0465cdd5a08aa8b1f653a3da4?v=1" width="30" height="30" class="d-inline-block align-top" alt="" />
+        <h3 class="ml-1">Dealabs</h3>
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('plans') }}">Bon plans</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('promocodes') }}">Codes promo</a>
+            </li>
+        </ul>
+
+        {{  render(controller('App\\Controller\\SearchController:dealSearch')) }}
+
+        <div class="btn-group">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="btn text-white">Connecté en tant que <strong>{{ app.user.email }}</strong></div>
+                <a class="btn btn-info" href="{{ path('user_profil')}}">Mon compte</a>
+                <a class="btn btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+                <a class="btn btn-info" href="{{ path('create_plan') }}">Poster un bon plan</a>
+                <a class="btn btn-info" href="{{ path('create_promoCode') }}">Poster un code promo</a>
+                <a class="btn btn-info" href="{{ path('create_group') }}">Créer un groupe</a>
+            {% else %}
+                <a class="btn btn-success" href="{{ path('app_login') }}">Connexion</a>
+                <a class="btn btn-primary" href="{{ path('user_registration') }}">Inscription</a>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>

@@ -1,0 +1,11 @@
+<div class="border border-dark rounded p-2 bg-dark text-white">{{ deal.commentCount }} {{ deal.commentCount > 1 ? 'commentaires' : 'commentaire' }} :</div>
+
+{% for comment in comments %}
+    <div class="card text-dark bg-white mb-1 border-dark">
+        <h5 class="card-header">{{ comment.author.username }}</h5>
+        <h5 class="card-header">{{ comment.date | date }}</h5>
+        <div class="card-body">
+            <p class="card-text text-force-break">{{ comment.text }}</p>
+        </div>
+    </div>
+{% endfor %}

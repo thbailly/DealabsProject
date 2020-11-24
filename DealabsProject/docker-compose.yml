@@ -1,0 +1,58 @@
+version: '3'
+services:
+    apache:
+        build: .docker/apache
+        container_name: bailly_barland_apache
+        ports:
+          - 9521:80
+        volumes:
+          - .docker/config/vhosts:/etc/apache2/sites-enabled
+          - .:/var/www/bailly_barland
+          - .docker/data/apache:/var/log/apache2
+        environment:
+          PHP_IDE_CONFIG: serverName=bailly_barland.docker
+        depends_on:
+          - php
+
+    php:
+        build: .docker/php
+        container_name: bailly_barland_php
+        volumes:
+          - .:/var/www/bailly_barland
+        environment:
+          - mailcatcher_host=bailly_barland_mailcatcher
+        depends_on:
+          - mailcatcher
+
+    mailcatcher:
+        container_name: bailly_barland_mailcatcher
+        restart: on-failure:10
+        image: dockage/mailcatcher:0.7.1
+        ports:
+            - 9522:1080
+            - 9520:1025
+
+    mysql:
+        image: mysql:5.7
+        command: ['--default-authentication-plugin=mysql_native_password']
+        container_name: bailly_barland_mysql
+        volumes:
+            - .docker/data/db:/var/lib/mysql
+        ports:
+            - "9523:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: bailly_barland
+            MYSQL_USER: bailly_barland
+            MYSQL_PASSWORD: bailly_barland
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: bailly_barland_phpmyadmin
+        environment:
+          PMA_HOST: mysql
+          PMA_PORT: 3306
+        ports:
+            - 9524:80
+        links:
+            - mysql
