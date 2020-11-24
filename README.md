@@ -1,7 +1,7 @@
 ## Installation
 
 ### Clonage du repos
-> git clone https://gitlab.iut-clermont.uca.fr/php-symfony-2019/dealabs-2020/bailly-barland.git
+> git clone https://github.com/thbailly/DealabsProject.git
 
 ### Installation et initialisation
 
